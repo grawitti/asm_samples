@@ -1,5 +1,7 @@
 global _start
 
+%include "syscalls.inc"
+
 ; this section for reserving memory for not initialized data
 section .bss
 ; resb, resd, resw - directives for reserv not initialized memory
@@ -53,16 +55,9 @@ _start:
 	mov	bl, 2
 	idiv	bl		; division sign numbers ax:bl
 
+print:
+  _syscall_print_stdout msg, 12
 
-; print string from ecx, size of string in edx
-print:	mov	ecx, msg	; address of string to output
-	mov	edx, 12		; number of bytes
-	mov	eax, 4		; system call 1 is write
-	mov	ebx, 1 		; file handle 1 is stdout
-	int	0x80		; invoke OS system call
-
-; exit with exit code from ebx
-exit:	mov	eax, 1	; system call 60 is exit
-	mov	ebx, 0	; exit code 0
-	int	0x80	; invoke OS system call
+exit:
+  _syscall_exit 0
 

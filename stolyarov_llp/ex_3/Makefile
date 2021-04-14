@@ -1,5 +1,6 @@
 ASM=nasm
-ASM_FLAGS=-f elf
+MACROLIB_PATH=../../macrolib
+ASM_FLAGS=-f elf -i$(MACROLIB_PATH)
 SRC=ex_3
 LD_FLAGS=-m elf_i386
 
@@ -11,5 +12,5 @@ asm:
 ld: asm
 	ld $(SRC).o $(LD_FLAGS) -o $(SRC)
 
-clear:
+clean:
 	rm -rf *.o $(SRC)
