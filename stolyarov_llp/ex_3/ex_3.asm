@@ -1,12 +1,13 @@
 global _start
 
+; this section for reserving memory for not initialized data
 section .bss
-
 ; resb, resd, resw - directives for reserv not initialized memory
 string	resb	16	; reserv byte array size 16 byte
 count	resw	256	; reserv word array size 256 word = 512 byte
 x	resd	1	; reserv dword array size 1 dword = 4 byte
 
+; this section for define initialized data
 section .data
 ; db, dw, dd - directives for define data
 msg	db	'Hello World', 0xa	; reserv 12 bytes and define data = Hello World\n
